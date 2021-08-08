@@ -42,12 +42,12 @@ https://webbibouroku.com/Blog/Article/pytest#outline__3_1
 # 6
 取得した情報をスプレッドシートに自動的に保存してみましょう。
 まずは、GCPアカウントが必要なので、GCPアカウントを取得してください。
-その上で、スプレッドシートAPIを有効化してください。
+その上で、スプレッドシートAPIを有効化してください。  
 [参考](https://note.com/npaka/n/nd522e980d995)
  
 # 7 
  以下のサンプルコードを使用して、スプレッドシートと連携できることを確認してください。
-その上で、2で作成した商品情報取得APIと連携させて、スプレッドシートに保存できることを確認してください。
+その上で、2で作成した商品情報取得APIと連携させて、スプレッドシートに保存できることを確認してください。  
 [サンプル](https://github.com/marutoraman/yahoo-api-gss-sample)
 - main/ans_main.py 呼び出すコードの参考
 - common/spread_sheet_manager.py スプレッドシート管理
