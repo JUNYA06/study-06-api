@@ -45,7 +45,8 @@ https://webbibouroku.com/Blog/Article/pytest#outline__3_1
 その上で、スプレッドシートAPIを有効化してください。
 https://note.com/npaka/n/nd522e980d995
  
-# 7 以下のサンプルコードを使用して、スプレッドシートと連携できることを確認してください。
+# 7 
+ 以下のサンプルコードを使用して、スプレッドシートと連携できることを確認してください。
 その上で、2で作成した商品情報取得APIと連携させて、スプレッドシートに保存できることを確認してください。
 https://github.com/marutoraman/yahoo-api-gss-sample
 - main/ans_main.py 呼び出すコードの参考
