@@ -1,39 +1,41 @@
 import requests
 import urllib
-
-REQUEST_URL = 'https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706'
-APP_ID = '1099071000661495268'
+import pandas as pd
 
 
-def search_items(keyword: str):
+
+def main():
+    
+    URL = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706"
+    APP_ID = '1019079537947262807'
 
     params = {
-        'keyword':keyword,
-        'applicationId' : APP_ID,
-        'format':'json',
-        'minPrice':10000
+    'applicationId' : APP_ID,
+    'format':'json',
+    'keyword':'鬼滅',
     }
-
-    res = execute_api(url=REQUEST_URL,params=params)
-
     
 
+    res = requests.get(URL,params)
+    res.status_code
+    result = res.json()
+    items = result['Items']
+    items_list = [item['Item'] for item in items]
+    df_items = pd.DataFrame(items_list)[:3]
+    print(df_items)
+
+    # 課題6-2 商品名と価格の一覧を取得
+    columns = [  'itemName', 'itemPrice','shopCode', 'shopName','reviewCount',
+    'itemUrl']
+    df = df_items[columns]
+    print(df.head())
+
+    #課題6-4 ランキングの出力
+    # for obj in result["Items"]:
+    #     print(f'rank: {obj["Item"]["rank"]} / item_name: {obj["Item"]["itemName"]}')
 
 
-    result = requests.get(url)
-    
-    
-    counter = 0
-    for i in resp['Items']:
-        counter = counter + 1
-        item = i['Item']
-        name = item['itemName']
-            print '【No.】'+ str(counter)
-        print '【Name】' + str(name[:30].encode('utf-8')) + '...'
-        print '【Price】' + '¥' +str(item['itemPrice'])
-        print '【URL】',item['itemUrl']
-        print '【shop】',item['shopName']
-        print '【text】', item['itemCaption']
-    return result.json()
+    # 課題6-4 CSVに出力
+    # df_items.to_csv('test.csv',encoding="utf-8_sig")
 
-
+main()

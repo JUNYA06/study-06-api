@@ -7,7 +7,7 @@ APP_ID = '1099071000661495268'
 params = {
     'applicationId' : APP_ID,
     'format':'json',
-    'keyword':'バスタオル',
+    'keyword':'毀滅',
     'minPrice':10000
 }
 
