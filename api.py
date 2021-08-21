@@ -1,63 +1,45 @@
 import requests
 import urllib
+import pandas as pd
 
 
 def get_api(url):
-    result = requests.get(url)
     
-    
-    counter = 0
-    for i in resp['Items']:
-        counter = counter + 1
-        item = i['Item']
-        name = item['itemName']
-            print '【No.】'+ str(counter)
-        print '【Name】' + str(name[:30].encode('utf-8')) + '...'
-        print '【Price】' + '¥' +str(item['itemPrice'])
-        print '【URL】',item['itemUrl']
-        print '【shop】',item['shopName']
-        print '【text】', item['itemCaption']
     return result.json()
 
 
 def main():
-    keyword = "鬼滅"
-    url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?format=json&keyword={}&applicationId=1019079537947262807".format(
-        keyword)
-<<<<<<< HEAD
-    payload = {
-    'hits': 30,#一度のリクエストで返してもらう最大個数（MAX30)
-    'page':1,#何ページ目か
-    'postageFlag':1,#送料込みの商品に限定
+    
+    URL = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706"
+    APP_ID = '1019079537947262807'
+
+    params = {
+    'applicationId' : APP_ID,
+    'format':'json',
+    'keyword':'鬼滅',
     }
-    r = requests.get(url, params=payload)
-    resp = r.json()
-    total = int(resp['count'])
-    Max = total/30 + 1
-    print("【num of item】",total)
-    print("【num of page】",Max)
-    print("===================================")
+    
 
-    counter = 0
-    for i in resp['Items']:
-        counter = counter + 1
-        item = i['Item']
-        name = item['itemName']
-        print('【No.】'+ str(counter)) 
-        print('【Name】' + str(name[:30].encode('utf-8')) + '...')
-        print('【Price】' + '¥' +str(item['itemPrice']))
-        print('【URL】',item['itemUrl'])
-        print('【shop】',item['shopName'])
-        print('【text】', item['itemCaption'])
+    res = requests.get(URL,params)
+    res.status_code
+    result = res.json()
+    items = result['Items']
+    items_list = [item['Item'] for item in items]
+    df_items = pd.DataFrame(items_list)[:3]
+    print(df_items)
+
+    # 課題6-2 商品名と価格の一覧を取得
+    columns = [  'itemName', 'itemPrice','shopCode', 'shopName','reviewCount',
+    'itemUrl']
+    df = df_items[columns]
+    print(df.head())
+
+    #課題6-4 ランキングの出力
+    # for obj in result["Items"]:
+    #     print(f'rank: {obj["Item"]["rank"]} / item_name: {obj["Item"]["itemName"]}')
 
 
-    # print(get_api(url))
-=======
-
-    print(get_api(url))
->>>>>>> bb69eec9cca8c48e84557e48ac02a85db9eb7825
-
+    # 課題6-4 CSVに出力
+    # df_items.to_csv('test.csv',encoding="utf-8_sig")
 
 main()
-
-商
